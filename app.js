@@ -38,11 +38,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', routes);
-app.use('/register', users);
-app.use('/login', users);
-
-
 //Express session
 app.use(session({
   secret:'secret',
@@ -83,8 +78,13 @@ app.use(function(req, res, next){
   next();
 });
 
+app.use('/', routes);
+app.use('/users', users);
+
 //set port
 app.set('port', (process.env.PORT || 3000));
+
+//Start App
 
 app.listen(app.get('port'),function(){
   console.log('Server start on port ' +app.get('port'));
