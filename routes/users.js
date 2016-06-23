@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var User = require ('../models/user');
 
@@ -50,6 +51,18 @@ router.post('/register', function(req, res){
         req.flash('success_msg','You are registered and can now login');
         res.redirect('/users/login');
     }
+});
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        
+    }
+));
+
+app.post('/login',
+passport.authenticate('local', {successRedirect:'/',failureRedirect:'/users/login', failureFlash: true}),
+function(req, res){
+    res.redirect('/');
 });
 
 module.exports = router;
