@@ -28,3 +28,5 @@ module.exports.createUser = function(newUser, callback){
         });
     });
 }
+
+module.exports.getUserByUsername
